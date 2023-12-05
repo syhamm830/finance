@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calcul des Intérêts</title>
+    <style>
+        body {
+            background-image: url(./ep1.jpeg);
+            
+        }
+
+        .but {
+            color: white;
+            background-color: #be9167;
+            border-radius: 4px;
+            cursor: pointer;
+            padding-left: 5px;
+            padding-right: 5px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            font-family: arial;
+            font-size: 25px;
+        }
+
+        .main {
+            display: flex;
+            justify-content: center;
+        }
+
+        .fiel {
+            margin-top: 50px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .titre {
+            font-size: 45px;
+            font-weight: bolder;
+            font-family: arial;
+        }
+
+        .lo {
+            font-size: 25px;
+            font-weight: bold;
+            font-family: arial;
+            
+        }
+        .outpout{
+            font-size: 25px;
+            font-weight: bold;
+            font-family: arial;
+            margin-right:400px;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <form>
+            <fieldset class="fiel">
+                <legend class="titre">Calcul des Intérêts</legend>
+                <label for="principal" class="lo">Montant (en dinars) :</label>
+                <input type="number" id="principal" placeholder="Entrer le montant...">
+                <br>
+                <label for="rate" class="lo">Taux d'intérêt annuel (%) :</label>
+                <input type="number" id="rate" placeholder="Entrer le taux d'intérêt annuel...">
+                <br>
+                <label for="time" class="lo">Durée (en années) :</label>
+                <input type="number" id="time" placeholder="Entrer la durée en années...">
+                <br>
+                <button class="but" type="button" onclick="calculateSimpleInterest()">Calculer Intérêts Simples</button>
+                <button class="but" type="button" onclick="calculateCompoundInterest()">Calculer Intérêts Composés</button>
+                <button class="but" type="button" onclick="calculateEscompte()">Calculer Escompte</button>
+            </fieldset>
+            <h2 class="titre">Résultat :</h2>
+            <p id="result" class="outpout">Le montant total est : 0.00 dinars</p>
+        </form>
+    </div>
+
+    <script>
+        function calculateSimpleInterest() {
+            var principal = parseFloat(document.getElementById('principal').value);
+            var rate = parseFloat(document.getElementById('rate').value);
+            var time = parseFloat(document.getElementById('time').value);
+
+            var interest = (principal * rate * time) / 100;
+            var totalAmount = principal + interest;
+
+            var resultElement = document.getElementById('result');
+            resultElement.innerText = "Le montant total après intérêts simples est : " + totalAmount.toFixed(2) + " dinars";
+        }
+
+        function calculateCompoundInterest() {
+            var principal = parseFloat(document.getElementById('principal').value);
+            var rate = parseFloat(document.getElementById('rate').value);
+            var time = parseFloat(document.getElementById('time').value);
+
+            var compoundAmount = principal * Math.pow((1 + rate / 100), time);
+
+            var resultElement = document.getElementById('result');
+            resultElement.innerText = "Le montant total après intérêts composés est : " + compoundAmount.toFixed(2) + " dinars";
+        }
+
+        function calculateEscompte() {
+            var principal = parseFloat(document.getElementById('principal').value);
+            var rate = parseFloat(document.getElementById('rate').value);
+            var time = parseFloat(document.getElementById('time').value);
+
+            var escompteAmount = (principal * rate * time) / (360 * 100);
+
+            var resultElement = document.getElementById('result');
+            resultElement.innerText = "Le montant d'escompte est : " + escompteAmount.toFixed(2) + " dinars";
+        }
+    </script>
+</body>
+</html>
+
